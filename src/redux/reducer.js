@@ -7,7 +7,7 @@ import {
 } from "./actions";
 
 const initialState = {
-  member: { username: "" },
+  member: { username: "", id: 0 },
   valueSignIn: "",
   text: "",
   messages: [],
@@ -16,7 +16,10 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case HANDLE_SUBMIT:
-      return { ...state, member: { username: action.payload } };
+      return {
+        ...state,
+        member: { username: action.payload, id: Math.random() + 7 },
+      };
     case HANDLE_USERNAME:
       return { ...state, valueSignIn: action.payload };
     case HANDLE_MSG:

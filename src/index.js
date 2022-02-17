@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./index.css";
-import Home from "./components/Home/Home";
+import App from "./App";
 import SignIn from "./components/SignIn";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -19,9 +19,9 @@ ReactDOM.render(
     <Provider store={store}>
       <Routes>
         <Route path="/" element={<SignIn />} />
-        <Route path="/General" element={<Home room="General" />} />
-        <Route path="/Games" element={<Home room="Games" />} />
-        <Route path="/Sport" element={<Home room="Sport" />} />
+        <Route path="/General" element={<App room="General" />} />
+        <Route path="/Games" element={<App room="Games" />} />
+        <Route path="/Sport" element={<App room="Sport" />} />
       </Routes>
     </Provider>
   </BrowserRouter>,
