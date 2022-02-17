@@ -4,6 +4,9 @@
   padding: 0;
 }
 
+small {
+  font-size: 10px;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -24,4 +27,19 @@
 
 .received {
   background-color: orange;
+}
+
+#app {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+#aside {
+  height: 100vh;
+  padding: 10px;
+  border: 1px black solid;
+}
+#chat-area {
+  flex-grow: 2;
+  padding: 10px;
 }

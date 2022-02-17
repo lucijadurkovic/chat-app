@@ -1,21 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import SignIn from "./components/SignIn";
 
 import "./index.css";
-import App from "./App";
+import Home from "./components/Home/Home";
+import SignIn from "./components/SignIn";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import { Provider } from "react-redux";
+import reducer from "./redux/reducer";
+import { createStore, applyMiddleware } from "redux";
+import thunkMiddleware from "redux-thunk";
+
+const store = createStore(reducer, applyMiddleware(thunkMiddleware)); //OVO MAKNI AKO SE NEĆE KORISTITI
+
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
+  <BrowserRouter>
+    <Provider store={store}>
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="signIn" element={<SignIn />} />
+        <Route path="/" element={<SignIn />} />
+        <Route path="/General" element={<Home room="General" />} />
+        <Route path="/Games" element={<Home room="Games" />} />
+        <Route path="/Sport" element={<Home room="Sport" />} />
       </Routes>
-    </BrowserRouter>
-  </React.StrictMode>,
+    </Provider>
+  </BrowserRouter>,
   document.getElementById("root")
 );
 
