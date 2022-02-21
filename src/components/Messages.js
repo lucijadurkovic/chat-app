@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 
-const Messages = (props) => {
-  const displayMessages = (message) => {
+function Messages(props) {
+  function displayMessages(message) {
     const sent = message.member.id === props.member.id;
-    const userame = message.member.clientData?.username; //upitnik jer nema username na loadu pa javlja error (set state prije mountanja)
+    const userame = message.member.clientData.username; //upitnik jer nema username na loadu pa javlja error (set state prije mountanja)
     if (props.messages !== []) {
       return (
-        <ul className="container">
-          <li key={Math.random() + 1} className={sent ? "sent" : "received"}>
+        <ul className='container'>
+          <li key={message.timestamp} className={sent ? "sent" : "received"}>
             <div>
               <span>
                 {userame} said:
@@ -22,20 +22,25 @@ const Messages = (props) => {
         </ul>
       );
     }
-  };
+  }
   return (
     <div>
       <span>Bok, {props.member.username || "stranger"}!</span>
-      <div>{props.messages.map((message) => displayMessages(message))}</div>
+      <div>
+        {props.messages.map((message) => {
+          return displayMessages(message);
+        })}
+      </div>
     </div>
   );
-};
+}
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     messages: state.messages,
+    member: state.member,
   };
-}
+};
 
 const mapDispatchToProps = {};
 

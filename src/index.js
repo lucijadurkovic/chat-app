@@ -18,10 +18,10 @@ ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
       <Routes>
-        <Route path="/" element={<SignIn />} />
-        <Route path="/General" element={<App room="General" />} />
-        <Route path="/Games" element={<App room="Games" />} />
-        <Route path="/Sport" element={<App room="Sport" />} />
+        <Route path='/' element={<SignIn />} />
+        <Route path='/General' element={<App room='General' />} />
+        <Route path='/Games' element={<App room='Games' />} />
+        <Route path='/Sport' element={<App room='Sport' />} />
       </Routes>
     </Provider>
   </BrowserRouter>,

@@ -4,6 +4,7 @@ import {
   HANDLE_MSG,
   CLEAR_MSG,
   PUSH_MSG,
+  PUSH_MEMBERS,
 } from "./actions";
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   valueSignIn: "",
   text: "",
   messages: [],
+  members: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -27,9 +29,12 @@ export default function reducer(state = initialState, action) {
     case CLEAR_MSG:
       return { ...state, text: initialState.text };
     case PUSH_MSG: {
-      state.messages.push(action.payload);
+      return { ...state, messages: [...state.messages, action.payload] };
+    }
+    case PUSH_MEMBERS: {
+      state.members.push(action.payload);
 
-      return { ...state, messages: state.messages };
+      return { ...state, members: state.members };
     }
     default:
       return state;

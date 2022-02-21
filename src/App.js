@@ -4,16 +4,18 @@ import Input from "./components/Input";
 import "./App.css";
 import SignOut from "./components/SignOut";
 
-import { handleMsgChange, clearMsg, pushMsg } from "./redux/actions";
+import {
+  handleMsgChange,
+  clearMsg,
+  pushMsg,
+  pushMembers,
+} from "./redux/actions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      members: [],
-    };
     this.drone = new window.Scaledrone("aOKticzsZfKAfItm", {
       data: this.props.member,
     });
@@ -49,7 +51,7 @@ class App extends Component {
 
     //za display tko je online
     this.room.on("members", (members) => {
-      this.setState({ members: members });
+      this.props.pushMembers({ payload: members });
     });
 
     //pokrene se kad 2.put uđem u sobu
@@ -57,21 +59,19 @@ class App extends Component {
       console.log(member);
       console.log("join");
       //alert(`${member.clientData.username} joined the chat`);
-      const members = this.state.members;
-      members.push(member);
-      this.setState({ members });
+      this.props.pushMembers({ payload: [...this.props.members, member] });
     });
 
     //pokreće se na unsubscribe (povratak na listu soba) ili close tab
     this.room.on("member_leave", (member) => {
-      const members = [...this.state.members];
+      const members = [...this.props.members];
       //   alert(`${member.clientData.username} left the chat`); //obrisati ovog člana iz arraya membersa
 
       // filter out the item being deleted
       const updatedMembers = members.filter(
         (clan) => clan.clientData.username !== member.clientData.username
       );
-      this.setState({ members: updatedMembers });
+      this.props.pushMembers({ payload: updatedMembers });
     });
   }
 
@@ -96,24 +96,24 @@ class App extends Component {
 
   handleUnsubscribe() {
     this.room.unsubscribe();
-    this.setState({ members: [] });
+    this.props.pushMembers({ payload: [] });
   }
 
   render() {
     console.log("render");
     return (
-      <div id="app">
-        <div id="aside">
-          <div id="online">
+      <div id='app'>
+        <div id='aside'>
+          <div id='online'>
             <h3>Tko je online:</h3>
             <ul>
-              {this.state.members.map((member) => this.displayMembers(member))}
+              {this.props.members.map((member) => this.displayMembers(member))}
             </ul>
           </div>
         </div>
-        <div id="chat-area">
+        <div id='chat-area'>
           <h3>Soba: {this.room.ime}</h3>
-          <Messages member={this.props.member} />
+          <Messages />
           <Input
             value={this.props.text}
             handleSend={(e) => this.handleSend(e)}
@@ -121,7 +121,7 @@ class App extends Component {
           />
         </div>
         <div>
-          <Link onClick={() => this.handleUnsubscribe()} to="/">
+          <Link onClick={() => this.handleUnsubscribe()} to='/'>
             Povratak na listu soba
           </Link>
           <br />
@@ -136,6 +136,7 @@ function mapStateToProps(state) {
     text: state.text,
     member: state.member,
     messages: state.messages,
+    members: state.members,
   };
 }
 
@@ -143,6 +144,7 @@ const mapDispatchToProps = {
   handleMsgChange,
   clearMsg,
   pushMsg,
+  pushMembers,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

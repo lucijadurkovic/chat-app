@@ -3,6 +3,7 @@ export const HANDLE_USERNAME = "HANDLE_CHANGE";
 export const HANDLE_MSG = "HANDLE_MSG";
 export const CLEAR_MSG = "CLEAR_MSG";
 export const PUSH_MSG = "PUSH_MSG";
+export const PUSH_MEMBERS = "PUSH_MEMBERS";
 
 export const handleSubmit = (event) => {
   //event.preventDefault(); - ne treba?
@@ -26,6 +27,10 @@ export const clearMsg = () => {
 
 export const pushMsg = (newMsg) => {
   return { type: PUSH_MSG, payload: newMsg };
+};
+
+export const pushMembers = (newMembers) => {
+  return { type: PUSH_MEMBERS, payload: newMembers };
 };
 
 /*export const osvjeziFilmove = () => async (dispatch) => {
