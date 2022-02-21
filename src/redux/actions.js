@@ -24,8 +24,8 @@ export const clearMsg = () => {
   return { type: CLEAR_MSG };
 };
 
-export const pushMsg = (newMsgs) => {
-  return { type: PUSH_MSG, payload: newMsgs };
+export const pushMsg = (newMsg) => {
+  return { type: PUSH_MSG, payload: newMsg };
 };
 
 /*export const osvjeziFilmove = () => async (dispatch) => {

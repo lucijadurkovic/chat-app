@@ -26,8 +26,11 @@ export default function reducer(state = initialState, action) {
       return { ...state, text: action.payload };
     case CLEAR_MSG:
       return { ...state, text: initialState.text };
-    case PUSH_MSG:
-      return { ...state, messages: action.payload };
+    case PUSH_MSG: {
+      state.messages.push(action.payload);
+
+      return { ...state, messages: state.messages };
+    }
     default:
       return state;
   }

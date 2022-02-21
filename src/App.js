@@ -12,7 +12,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [],
       members: [],
     };
     this.drone = new window.Scaledrone("aOKticzsZfKAfItm", {
@@ -24,7 +23,6 @@ class App extends Component {
       if (error) {
         return console.error(error);
       }
-      console.log("on open");
       const member = this.props.member;
       member.id = this.drone.clientId;
     });
@@ -37,7 +35,6 @@ class App extends Component {
     //dodaje nove poruke u messages state
     this.room.on("message", (message) => {
       console.log("room on message - PUSH");
-      console.log(message);
       const { data, member, timestamp } = message;
       let vrijeme = timestamp * 1000;
       var date = new Date(timestamp * 1000);
@@ -46,15 +43,12 @@ class App extends Component {
       var seconds = "0" + date.getSeconds();
       vrijeme = `${hours} : ${minutes.substr(-2)} : ${seconds.substr(-2)}`;
 
-      const messages = this.state.messages;
-      messages.push({ member, text: data, timestamp: vrijeme });
-      this.setState({ messages: messages });
-      // this.props.pushMsg(messages);
+      this.props.pushMsg({ member, text: data, timestamp: vrijeme }); //nema novog rendera
+      console.log(this.props.messages);
     });
 
     //za display tko je online
     this.room.on("members", (members) => {
-      console.log("room on members");
       this.setState({ members: members });
     });
 
@@ -62,7 +56,7 @@ class App extends Component {
     this.room.on("member_join", (member) => {
       console.log(member);
       console.log("join");
-      alert(`${member.clientData.username} joined the chat`);
+      //alert(`${member.clientData.username} joined the chat`);
       const members = this.state.members;
       members.push(member);
       this.setState({ members });
@@ -71,7 +65,7 @@ class App extends Component {
     //pokreće se na unsubscribe (povratak na listu soba) ili close tab
     this.room.on("member_leave", (member) => {
       const members = [...this.state.members];
-      alert(`${member.clientData.username} left the chat`); //obrisati ovog člana iz arraya membersa
+      //   alert(`${member.clientData.username} left the chat`); //obrisati ovog člana iz arraya membersa
 
       // filter out the item being deleted
       const updatedMembers = members.filter(
@@ -106,6 +100,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("render");
     return (
       <div id="app">
         <div id="aside">
@@ -118,7 +113,7 @@ class App extends Component {
         </div>
         <div id="chat-area">
           <h3>Soba: {this.room.ime}</h3>
-          <Messages member={this.props.member} messages={this.state.messages} />
+          <Messages member={this.props.member} />
           <Input
             value={this.props.text}
             handleSend={(e) => this.handleSend(e)}
@@ -140,7 +135,7 @@ function mapStateToProps(state) {
   return {
     text: state.text,
     member: state.member,
-    // messages: state.messages,
+    messages: state.messages,
   };
 }
 
