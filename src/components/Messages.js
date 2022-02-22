@@ -8,7 +8,7 @@ const Messages = (props) => {
     if (props.messages !== []) {
       return (
         <ul className="container">
-          <li key={Math.random() + 1} className={sent ? "sent" : "received"}>
+          <li key={message.timestamp} className={sent ? "sent" : "received"}>
             <div>
               <span>
                 {userame} said:
@@ -26,7 +26,11 @@ const Messages = (props) => {
   return (
     <div>
       <span>Bok, {props.member.username || "stranger"}!</span>
-      <div>{props.messages.map((message) => displayMessages(message))}</div>
+      <div>
+        {props.messages.map((message) => {
+          return displayMessages(message);
+        })}
+      </div>
     </div>
   );
 };
@@ -34,6 +38,7 @@ const Messages = (props) => {
 function mapStateToProps(state) {
   return {
     messages: state.messages,
+    member: state.member,
   };
 }
 

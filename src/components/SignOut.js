@@ -1,7 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { handleSubmit } from "../redux/actions";
+import { connect } from "react-redux";
 
-const SignOut = () => {
-  return <button>SignOut</button>;
+const SignOut = (props) => {
+  const resetUsername = () => {
+    props.handleSubmit("");
+  };
+  return (
+    <button>
+      <Link to="/" onClick={resetUsername}>
+        Signout
+      </Link>
+    </button>
+  );
 };
 
-export default SignOut;
+function mapStateToProps(state) {
+  return {
+    member: state.member,
+  };
+}
+
+const mapDispatchToProps = {
+  handleSubmit,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignOut);

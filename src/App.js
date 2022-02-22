@@ -4,27 +4,30 @@ import Input from "./components/Input";
 import "./App.css";
 import SignOut from "./components/SignOut";
 
-import { handleMsgChange, clearMsg, pushMsg } from "./redux/actions";
+import {
+  handleMsgChange,
+  clearMsg,
+  pushMsg,
+  pushMembers,
+  addMemberID,
+  removeMember,
+  unsubscribe,
+} from "./redux/actions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      members: [],
-    };
     this.drone = new window.Scaledrone("aOKticzsZfKAfItm", {
       data: this.props.member,
     });
 
-    //dodaje clientID useru
     this.drone.on("open", (error) => {
       if (error) {
         return console.error(error);
       }
-      const member = this.props.member;
-      member.id = this.drone.clientId;
+      this.props.addMemberID(this.drone.clientId);
     });
 
     this.room = this.drone.subscribe(`observable-${this.props.room}`, {
@@ -34,7 +37,6 @@ class App extends Component {
 
     //dodaje nove poruke u messages state
     this.room.on("message", (message) => {
-      console.log("room on message - PUSH");
       const { data, member, timestamp } = message;
       let vrijeme = timestamp * 1000;
       var date = new Date(timestamp * 1000);
@@ -43,44 +45,26 @@ class App extends Component {
       var seconds = "0" + date.getSeconds();
       vrijeme = `${hours} : ${minutes.substr(-2)} : ${seconds.substr(-2)}`;
 
-      this.props.pushMsg({ member, text: data, timestamp: vrijeme }); //nema novog rendera
-      console.log(this.props.messages);
+      this.props.pushMsg({ member, text: data, timestamp: vrijeme });
     });
 
-    //za display tko je online
+    //za display tko je online - vdjeti jel suvišna jer se displayayju u renderu
     this.room.on("members", (members) => {
-      this.setState({ members: members });
+      this.props.pushMembers(members);
     });
 
-    //pokrene se kad 2.put uđem u sobu
     this.room.on("member_join", (member) => {
-      console.log(member);
-      console.log("join");
-      //alert(`${member.clientData.username} joined the chat`);
-      const members = this.state.members;
-      members.push(member);
-      this.setState({ members });
+      //  alert(`${member.clientData.username} joined the chat`);
+      this.props.pushMembers(member);
     });
 
-    //pokreće se na unsubscribe (povratak na listu soba) ili close tab
     this.room.on("member_leave", (member) => {
-      const members = [...this.state.members];
-      //   alert(`${member.clientData.username} left the chat`); //obrisati ovog člana iz arraya membersa
-
-      // filter out the item being deleted
-      const updatedMembers = members.filter(
-        (clan) => clan.clientData.username !== member.clientData.username
-      );
-      this.setState({ members: updatedMembers });
+      //  alert(`${member.clientData.username} left the chat`);
+      this.props.removeMember(member);
     });
-  }
-
-  displayMembers(member) {
-    return <li key={Math.random() + 5}>{member.clientData?.username}</li>;
   }
 
   onSendMessage(message) {
-    console.log("onsendmessage - PUBLISH");
     this.drone.publish({
       room: `observable-${this.props.room}`,
       message,
@@ -96,18 +80,19 @@ class App extends Component {
 
   handleUnsubscribe() {
     this.room.unsubscribe();
-    this.setState({ members: [] });
+    this.props.unsubscribe();
   }
 
   render() {
-    console.log("render");
     return (
       <div id="app">
         <div id="aside">
           <div id="online">
             <h3>Tko je online:</h3>
             <ul>
-              {this.state.members.map((member) => this.displayMembers(member))}
+              {this.props.members.map((member) => (
+                <li key={Math.random() + 5}>{member.clientData?.username}</li>
+              ))}
             </ul>
           </div>
         </div>
@@ -121,7 +106,7 @@ class App extends Component {
           />
         </div>
         <div>
-          <Link onClick={() => this.handleUnsubscribe()} to="/">
+          <Link onClick={(e) => this.handleUnsubscribe(e)} to="/">
             Povratak na listu soba
           </Link>
           <br />
@@ -136,6 +121,7 @@ function mapStateToProps(state) {
     text: state.text,
     member: state.member,
     messages: state.messages,
+    members: state.members,
   };
 }
 
@@ -143,6 +129,10 @@ const mapDispatchToProps = {
   handleMsgChange,
   clearMsg,
   pushMsg,
+  pushMembers,
+  addMemberID,
+  removeMember,
+  unsubscribe,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
