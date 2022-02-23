@@ -86,31 +86,41 @@ class App extends Component {
   render() {
     return (
       <div id="app">
-        <div id="aside">
-          <div id="online">
-            <h3>Tko je online:</h3>
-            <ul>
-              {this.props.members.map((member) => (
-                <li key={Math.random() + 5}>{member.clientData?.username}</li>
-              ))}
-            </ul>
+        <div id="online">
+          <div id="aside">
+            <div id="asideNaslov">
+              <img src="../media/members.png" />
+              <h3>Online members:</h3>
+
+              <ul>
+                {this.props.members.map((member) => (
+                  <li key={Math.random() + 5}>
+                    <span className="onlineDot">&#9679;</span>
+                    {member.clientData?.username}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div id="asideBottom">
+              <Link onClick={(e) => this.handleUnsubscribe(e)} to="/">
+                Back to room list
+              </Link>
+              <br />
+              <SignOut />
+            </div>
           </div>
         </div>
         <div id="chat-area">
-          <h3>Soba: {this.room.ime}</h3>
-          <Messages member={this.props.member} />
+          <h3>
+            Room name: <span>{this.room.ime}</span>
+          </h3>
+          <Messages member={this.props.member}></Messages>
+
           <Input
             value={this.props.text}
             handleSend={(e) => this.handleSend(e)}
             handleChange={this.props.handleMsgChange}
           />
-        </div>
-        <div>
-          <Link onClick={(e) => this.handleUnsubscribe(e)} to="/">
-            Povratak na listu soba
-          </Link>
-          <br />
-          <SignOut />
         </div>
       </div>
     );

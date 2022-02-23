@@ -6,32 +6,41 @@ import { Link } from "react-router-dom";
 const SignIn = (props) => {
   if (props.member.username === "") {
     return (
-      <div className="App">
-        <h1>Welcome to Lucija's chatroom!</h1>
-        <h2>Sign in!</h2>
-        <form onSubmit={props.handleSubmit}>
-          <input id="username" onChange={props.handleUsername}></input>
-          <button onSubmit={props.handleSubmit} type="submit">
-            Sign in
-          </button>
+      <div className="signIn">
+        <img src="../media/chat.png"></img>
+        <form id="signinForm" onSubmit={props.handleSubmit}>
+          <h1>Welcome to my ChatApp.</h1>
+          <h2>Pick a username:</h2>
+          <div>
+            <input id="username" onChange={props.handleUsername}></input>
+            <button id="signinBtn" onSubmit={props.handleSubmit} type="submit">
+              Sign In
+            </button>
+          </div>
         </form>
       </div>
     );
   } else {
     return (
-      <div id="lista-soba">
-        <h3>Lista soba:</h3>
-        <ul>
-          <li key={Math.random() + 3}>
-            <Link to="/General">General</Link>
-          </li>
-          <li key={Math.random() + 3}>
-            <Link to="/Games">Games</Link>
-          </li>
-          <li key={Math.random() + 3}>
-            <Link to="/Sport">Sport</Link>
-          </li>
-        </ul>
+      <div id="listaSoba">
+        <div>
+          <h1>Room list:</h1>
+          <ul>
+            <li key={Math.random() + 3}>
+              <Link to="/General">General</Link>
+            </li>
+            <li key={Math.random() + 3}>
+              <Link to="/Games">Games</Link>
+            </li>
+            <li key={Math.random() + 3}>
+              <Link to="/Sport">Sport</Link>
+            </li>
+            <li key={Math.random() + 3}>
+              <Link to="/Fashion">Fashion</Link>
+            </li>
+          </ul>
+        </div>
+        <img src="../media/chat.png"></img>
       </div>
     );
   }

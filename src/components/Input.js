@@ -2,7 +2,7 @@ import React from "react";
 
 const Input = (props) => {
   return (
-    <form onSubmit={props.handleSend}>
+    <form onSubmit={props.handleSend} id="inputMsg">
       <input
         id="msg"
         value={props.value}

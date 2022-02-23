@@ -1,0 +1,213 @@
+//variables
+$sentMessages: #31a24c;
+$receivedMessages: #ebecf0;
+$primary: #093028;
+$secondary: #fefefe;
+
+//mixins
+@mixin flex($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+//Global styles
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Arial";
+  font-weight: 100;
+}
+
+#app {
+  @include flex(row);
+}
+
+//SignIn
+.signIn {
+  @include flex(row);
+  background: $secondary;
+  color: #093028;
+  gap: 50px;
+  height: 100vh;
+  img {
+    display: inherit;
+    height: 40vh;
+  }
+  #signinForm {
+    @include flex(column);
+    gap: 30px;
+    height: 80%;
+    border-radius: 6px;
+    h1 {
+      font-size: 40px;
+    }
+    h2 {
+      font-size: 30px;
+    }
+    #username,
+    #signinBtn {
+      padding: 10px;
+      margin: 3px;
+      color: $primary;
+    }
+
+    #signinBtn {
+      font-size: 15px;
+      background-color: $primary;
+      color: $secondary;
+      border-radius: 6px;
+      border: none;
+    }
+  }
+}
+
+#listaSoba {
+  @include flex(row);
+  gap: 10vw;
+  height: 100vh;
+  h1 {
+    font-size: 40px;
+    color: $primary;
+    margin-bottom: 10px;
+  }
+  ul {
+    font-size: 23px;
+    list-style-type: none;
+    text-align: center;
+    li {
+      padding: 5px;
+      color: $primary;
+      a {
+        text-decoration: none;
+        color: $primary;
+        &:visited {
+          color: $primary;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+        &:active {
+          color: #f3705a;
+        }
+      }
+    }
+  }
+  img {
+    height: 40vh;
+  }
+}
+
+//App
+#online {
+  height: 100vh;
+
+  #aside {
+    @include flex(column);
+    justify-content: space-between;
+    height: 100vh;
+    padding: 25px;
+    color: $secondary;
+    background-color: $primary;
+
+    img {
+      height: 30px;
+    }
+    h3 {
+      margin-bottom: 10px;
+    }
+    ul {
+      list-style-type: none;
+      li {
+        padding: 5px;
+        color: $secondary;
+        .onlineDot {
+          color: #31a24c;
+          margin-right: 6px;
+        }
+      }
+    }
+    #asideBottom {
+      @include flex(column);
+      justify-content: space-evenly;
+      a {
+        color: $secondary;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      #signOut {
+        padding: 8px;
+        background-color: $secondary;
+        color: $primary;
+        border-radius: 6px;
+      }
+    }
+  }
+}
+
+#chat-area {
+  flex-grow: 2;
+  height: 100vh;
+  @include flex(column);
+  justify-content: flex-start;
+  align-items: flex-start;
+  h3 {
+    background-color: #ebecf0;
+    padding: 10px;
+    width: 100%;
+    span {
+      font-weight: 600;
+    }
+  }
+  #welcomeMsg {
+    padding: 10px;
+  }
+  #messages {
+    width: 100%;
+    padding: 10px;
+  }
+  .container {
+    list-style-type: none;
+    width: 100%;
+    @include flex(column);
+    justify-content: flex-start;
+    align-items: flex-start;
+    li {
+      border-radius: 7px;
+      padding: 8px;
+      width: 15%;
+      margin: 5px;
+    }
+    .sent {
+      background-color: $sentMessages;
+      align-self: flex-end;
+      color: white;
+    }
+    .received {
+      background-color: $receivedMessages;
+      color: black;
+    }
+    small {
+      font-size: 10px;
+    }
+  }
+  #inputMsg {
+    padding-left: 10px;
+    color: $primary;
+    input,
+    button {
+      padding: 10px;
+      font-size: 15px;
+    }
+    button {
+      background-color: $primary;
+      color: $secondary;
+      border-radius: 6px;
+      border: none;
+    }
+  }
+}

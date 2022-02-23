@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { BigHead } from "@bigheads/core";
+import { getRandomOptions } from "../services/bigheads";
 
 function Messages(props) {
   function displayMessages(message) {
@@ -7,30 +9,26 @@ function Messages(props) {
     const userame = message.member.clientData.username; //upitnik jer nema username na loadu pa javlja error (set state prije mountanja)
     if (props.messages !== []) {
       return (
-        <ul className="container">
-          <li key={message.timestamp} className={sent ? "sent" : "received"}>
-            <div>
-              <span>
-                {userame} said:
-                <br />
-              </span>
-              <span>{message.text}</span>
-              <br />
-              <small>{message.timestamp}</small>
-            </div>
-          </li>
-        </ul>
+        <li key={message.timestamp} className={sent ? "sent" : "received"}>
+          <div id="avatar">
+            <BigHead {...getRandomOptions()} />
+          </div>
+          <span>{userame} said:</span>
+          <span>{message.text}</span>
+          <br />
+          <small>{message.timestamp}</small>
+        </li>
       );
     }
   }
   return (
-    <div>
-      <span>Bok, {props.member.username || "stranger"}!</span>
-      <div>
+    <div id="messages">
+      <span id="welcomeMsg">Hello, {props.member.username}!</span>
+      <ul className="container">
         {props.messages.map((message) => {
           return displayMessages(message);
         })}
-      </div>
+      </ul>
     </div>
   );
 }

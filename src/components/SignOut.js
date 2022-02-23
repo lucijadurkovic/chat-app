@@ -8,11 +8,9 @@ const SignOut = (props) => {
     props.handleSubmit("");
   };
   return (
-    <button>
-      <Link to="/" onClick={resetUsername}>
-        Signout
-      </Link>
-    </button>
+    <Link id="signOut" to="/" onClick={resetUsername}>
+      Signout
+    </Link>
   );
 };
 
