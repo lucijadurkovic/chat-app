@@ -7,7 +7,7 @@ const SignIn = (props) => {
   if (props.member.username === "") {
     return (
       <div className="signIn">
-        <img src="../media/chat.png"></img>
+        <img src="../media/chat.png" alt="chat icon"></img>
         <form id="signinForm" onSubmit={props.handleSubmit}>
           <h1>Welcome to my ChatApp.</h1>
           <h2>Pick a username:</h2>
@@ -40,7 +40,7 @@ const SignIn = (props) => {
             </li>
           </ul>
         </div>
-        <img src="../media/chat.png"></img>
+        <img src="../media/chat.png" alt="chat icon"></img>
       </div>
     );
   }

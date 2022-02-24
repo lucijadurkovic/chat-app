@@ -30,36 +30,54 @@ class App extends Component {
       this.props.addMemberID(this.drone.clientId);
     });
 
-    this.room = this.drone.subscribe(`observable-${this.props.room}`, {
-      historyCount: 5, //ne radi
-    });
+    this.room = this.drone.subscribe(`observable-${this.props.room}`);
     this.room.ime = this.props.room;
 
     //dodaje nove poruke u messages state
     this.room.on("message", (message) => {
       const { data, member, timestamp } = message;
+      console.log(this.props.members);
+      /* console.log(member.id);
+      console.log(this.props.member.id);
+
+      if (member.id === this.props.member.id) {
+        //ako je id člana koji je poslao poruku jednak idju logiranog membera
+        member.clientData.avatar = this.props.member.avatar; //stavi njegov avatar
+        console.log(member.clientData.avatar);
+      } else {
+        //FILTRIRATI MEMBERS, NAĆI TAJ ID I STAVITI NJEGOV AVATAR
+        console.log(member.id);
+        console.log(this.props.members);
+        let sender = this.props.members.filter(
+          //filtriraj members i nađi onog čiji je id isti ko od sendera i spremi tog membera u let
+          (clan) => clan.id !== member.id
+        );
+        console.log(sender);
+
+        // member.clientData.avatar = sender[0].clientData.avatar; //odaberi avatar tog membera
+        console.log(member.clientData.avatar);
+      }
+      console.log(member.clientData.avatar); //tu je krivi member.clientData.avatar, dodati if - ako je current onda taj, ako nije onda dodati avatar od tog koji je*/
+
       let vrijeme = timestamp * 1000;
       var date = new Date(timestamp * 1000);
       var hours = date.getHours();
       var minutes = "0" + date.getMinutes();
-      var seconds = "0" + date.getSeconds();
-      vrijeme = `${hours} : ${minutes.substr(-2)} : ${seconds.substr(-2)}`;
+      vrijeme = `${hours} : ${minutes.substr(-2)}`;
 
       this.props.pushMsg({ member, text: data, timestamp: vrijeme });
     });
 
-    //za display tko je online - vdjeti jel suvišna jer se displayayju u renderu
+    //za display tko je online
     this.room.on("members", (members) => {
       this.props.pushMembers(members);
     });
 
     this.room.on("member_join", (member) => {
-      //  alert(`${member.clientData.username} joined the chat`);
       this.props.pushMembers(member);
     });
 
     this.room.on("member_leave", (member) => {
-      //  alert(`${member.clientData.username} left the chat`);
       this.props.removeMember(member);
     });
   }
@@ -87,35 +105,36 @@ class App extends Component {
     return (
       <div id="app">
         <div id="online">
-          <div id="aside">
-            <div id="asideNaslov">
-              <img src="../media/members.png" />
+          <div id="asideNaslov">
+            <div>
+              <img src="../media/members.png" alt="members icon" />
               <h3>Online members:</h3>
-
-              <ul>
-                {this.props.members.map((member) => (
-                  <li key={Math.random() + 5}>
-                    <span className="onlineDot">&#9679;</span>
-                    {member.clientData?.username}
-                  </li>
-                ))}
-              </ul>
             </div>
-            <div id="asideBottom">
-              <Link onClick={(e) => this.handleUnsubscribe(e)} to="/">
-                Back to room list
-              </Link>
-              <br />
-              <SignOut />
-            </div>
+            <ul>
+              {this.props.members.map((member) => (
+                <li key={Math.random() + 5}>
+                  <span className="onlineDot">&#9679;</span>
+                  {member.clientData?.username}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div id="asideBottom">
+            <Link onClick={(e) => this.handleUnsubscribe(e)} to="/">
+              Back to room list
+            </Link>
+            <br></br>
+            <SignOut />
           </div>
         </div>
         <div id="chat-area">
-          <h3>
-            Room name: <span>{this.room.ime}</span>
-          </h3>
-          <Messages member={this.props.member}></Messages>
+          <div>
+            <h3>
+              Room name: <span>{this.room.ime}</span>
+            </h3>
 
+            <Messages member={this.props.member}></Messages>
+          </div>
           <Input
             value={this.props.text}
             handleSend={(e) => this.handleSend(e)}

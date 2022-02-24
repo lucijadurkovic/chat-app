@@ -146,11 +146,25 @@
   height: 40vh;
 }
 
-#online {
+#app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   height: 100vh;
 }
 
-#online #aside {
+#app #online {
+  height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -167,35 +181,73 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: 100vh;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   padding: 25px;
   color: #fefefe;
   background-color: #093028;
+  width: 15vw;
 }
 
-#online #aside img {
+#app #online #asideNaslov {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 4px;
+  padding-bottom: 10px;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+#app #online #asideNaslov div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding-bottom: 10px;
+  gap: 4px;
+}
+
+#app #online #asideNaslov div img {
   height: 30px;
 }
 
-#online #aside h3 {
-  margin-bottom: 10px;
-}
-
-#online #aside ul {
+#app #online ul {
   list-style-type: none;
 }
 
-#online #aside ul li {
+#app #online ul li {
   padding: 5px;
   color: #fefefe;
 }
 
-#online #aside ul li .onlineDot {
+#app #online ul li .onlineDot {
   color: #31a24c;
   margin-right: 6px;
 }
 
-#online #aside #asideBottom {
+#app #online #asideBottom {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -212,25 +264,32 @@
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
+  align-items: center;
+  -ms-flex-item-align: center;
+      align-self: center;
 }
 
-#online #aside #asideBottom a {
+#app #online #asideBottom a {
   color: #fefefe;
+  background-color: rebeccapurple;
   text-decoration: none;
+  text-align: center;
+  padding: 20px;
+  border-radius: 6px;
 }
 
-#online #aside #asideBottom a:hover {
+#app #online #asideBottom a:hover {
   text-decoration: underline;
 }
 
-#online #aside #asideBottom #signOut {
+#app #online #asideBottom #signOut {
   padding: 8px;
   background-color: #fefefe;
   color: #093028;
   border-radius: 6px;
 }
 
-#chat-area {
+#app #chat-area {
   -webkit-box-flex: 2;
       -ms-flex-positive: 2;
           flex-grow: 2;
@@ -248,34 +307,30 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
 }
 
-#chat-area h3 {
+#app #chat-area h3 {
   background-color: #ebecf0;
   padding: 10px;
-  width: 100%;
+  width: 85vw;
 }
 
-#chat-area h3 span {
+#app #chat-area h3 span {
   font-weight: 600;
 }
 
-#chat-area #welcomeMsg {
-  padding: 10px;
-}
-
-#chat-area #messages {
+#app #chat-area #messages {
   width: 100%;
   padding: 10px;
 }
 
-#chat-area .container {
+#app #chat-area #messages .container {
   list-style-type: none;
   width: 100%;
   display: -webkit-box;
@@ -297,46 +352,142 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  padding: 20px;
 }
 
-#chat-area .container li {
-  border-radius: 7px;
-  padding: 8px;
-  width: 15%;
+#app #chat-area #messages .container li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  border-radius: 8px 0px 8px 8px;
+  padding: 10px;
   margin: 5px;
+  height: 80px;
 }
 
-#chat-area .container .sent {
+#app #chat-area #messages .container li svg {
+  width: 50px;
+  height: 50px;
+}
+
+#app #chat-area #messages .container li #messageInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+#app #chat-area #messages .container li #messageInfo small {
+  padding-left: 3px;
+}
+
+#app #chat-area #messages .container li #messageInfo div:nth-of-type(1),
+#app #chat-area #messages .container li #messageInfo span {
+  font-weight: bold;
+}
+
+#app #chat-area #messages .container li #messageInfo #messageBody div {
+  padding: 3px;
+}
+
+#app #chat-area #messages .container .sent {
   background-color: #31a24c;
   -ms-flex-item-align: end;
       align-self: flex-end;
   color: white;
+  border-radius: 8px 0px 8px 8px;
 }
 
-#chat-area .container .received {
+#app #chat-area #messages .container .received {
   background-color: #ebecf0;
   color: black;
+  border-radius: 0px 8px 8px 8px;
 }
 
-#chat-area .container small {
+#app #chat-area #messages .container small {
   font-size: 10px;
 }
 
-#chat-area #inputMsg {
-  padding-left: 10px;
+#app #chat-area #inputMsg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding-left: 20px;
+  margin-bottom: 30px;
   color: #093028;
+  width: 100%;
 }
 
-#chat-area #inputMsg input,
-#chat-area #inputMsg button {
+#app #chat-area #inputMsg input,
+#app #chat-area #inputMsg button {
   padding: 10px;
   font-size: 15px;
+  height: 40px;
 }
 
-#chat-area #inputMsg button {
+#app #chat-area #inputMsg input {
+  width: 70vw;
+}
+
+#app #chat-area #inputMsg button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   background-color: #093028;
+  width: 10vw;
   color: #fefefe;
   border-radius: 6px;
   border: none;
+}
+
+#app #chat-area #inputMsg button img {
+  height: 25px;
 }
 /*# sourceMappingURL=App.css.map */

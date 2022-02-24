@@ -9,26 +9,40 @@ import {
   REMOVE_MEMBER,
   UNSUBSCRIBE,
 } from "./actions";
+import { BigHead } from "@bigheads/core";
+import { getRandomOptions } from "../services/bigheads";
 
 const initialState = {
-  member: { username: "", id: null },
+  member: { username: "", id: null, color: "", avatar: null },
   valueSignIn: "",
   text: "",
   messages: [],
   members: [],
 };
 
+const colors = ["darkmagenta", "darkgreen", "darkred", "darkblue"];
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case HANDLE_SUBMIT:
       return {
         ...state,
-        member: { username: action.payload, id: state.member.id },
+        member: {
+          id: state.member.id,
+          username: action.payload,
+          color: colors[Math.floor(Math.random() * 4)],
+          avatar: <BigHead {...getRandomOptions()} />,
+        },
       };
     case ADD_MEMBER_ID:
       return {
         ...state,
-        member: { username: state.member.username, id: action.payload },
+        member: {
+          username: state.member.username,
+          id: action.payload,
+          color: state.member.color,
+          avatar: state.member.avatar,
+        },
       };
     case HANDLE_USERNAME:
       return { ...state, valueSignIn: action.payload };
@@ -53,7 +67,7 @@ export default function reducer(state = initialState, action) {
       return { ...state, members: newMembers };
     }
     case UNSUBSCRIBE: {
-      return { ...state, members: [] };
+      return { ...state, members: [], messages: [] };
     }
 
     default:

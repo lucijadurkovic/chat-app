@@ -10,7 +10,7 @@ const Input = (props) => {
         onChange={props.handleChange}
       ></input>
       <button type="submit" onClick={props.handleSend}>
-        Send
+        <img src="../media/send.png" alt="send" />
       </button>
     </form>
   );
