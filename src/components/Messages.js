@@ -5,14 +5,10 @@ function Messages(props) {
   function displayMessages(message) {
     const sent = message.member.id === props.member.id;
     const userame = message.member.clientData.username;
-
-    //console.log(message.member.clientData.avatar); //oba su objekti ali kad želim ovog iscrtati, javi Objects are not valid as a React child
-    //console.log(props.member.avatar);
-
     if (props.messages !== []) {
       return (
         <li key={Math.random() + 1} className={sent ? "sent" : "received"}>
-          <div id="avatar">{props.member.avatar}</div>
+          <div id="avatar">{message.member.avatar}</div>
           <div id="messageInfo">
             <small>{message.timestamp}</small>
             <div id="messageBody">

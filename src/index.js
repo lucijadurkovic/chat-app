@@ -1,18 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
 import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import SignIn from "./components/SignIn";
-import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import { Provider } from "react-redux";
 import reducer from "./redux/reducer";
-import { createStore, applyMiddleware } from "redux";
-import thunkMiddleware from "redux-thunk";
+import { createStore } from "redux";
 
-const store = createStore(reducer, applyMiddleware(thunkMiddleware)); //OVO MAKNI AKO SE NEĆE KORISTITI
+const store = createStore(reducer);
 
 ReactDOM.render(
   <BrowserRouter>

@@ -7,22 +7,6 @@
   font-weight: 100;
 }
 
-#app {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
 .signIn {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -43,9 +27,43 @@
   height: 100vh;
 }
 
+@media (max-width: 480px) {
+  .signIn {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 20px;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+  }
+}
+
 .signIn img {
   display: inherit;
   height: 40vh;
+}
+
+@media (max-width: 768px) {
+  .signIn img {
+    height: 30vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .signIn img {
+    height: 20vh;
+  }
 }
 
 .signIn #signinForm {
@@ -67,12 +85,50 @@
   border-radius: 6px;
 }
 
+@media (max-width: 768px) {
+  .signIn #signinForm {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signIn #signinForm {
+    gap: 10px;
+    height: 30vh;
+  }
+}
+
 .signIn #signinForm h1 {
   font-size: 40px;
 }
 
+@media (max-width: 768px) {
+  .signIn #signinForm h1 {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signIn #signinForm h1 {
+    font-size: 17px;
+    text-align: center;
+  }
+}
+
 .signIn #signinForm h2 {
   font-size: 30px;
+}
+
+@media (max-width: 768px) {
+  .signIn #signinForm h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signIn #signinForm h2 {
+    font-size: 13px;
+  }
 }
 
 .signIn #signinForm #username,
@@ -82,12 +138,38 @@
   color: #093028;
 }
 
+@media (max-width: 768px) {
+  .signIn #signinForm #username,
+  .signIn #signinForm #signinBtn {
+    padding: 5px;
+  }
+}
+
 .signIn #signinForm #signinBtn {
   font-size: 15px;
   background-color: #093028;
   color: #fefefe;
   border-radius: 6px;
   border: none;
+}
+
+@media (max-width: 480px) {
+  .signIn #signinForm div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    align-items: center;
+  }
 }
 
 #listaSoba {
@@ -108,16 +190,50 @@
   height: 100vh;
 }
 
+@media (max-width: 480px) {
+  #listaSoba {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 20px;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+  }
+}
+
 #listaSoba h1 {
   font-size: 40px;
   color: #093028;
   margin-bottom: 10px;
 }
 
+@media (max-width: 768px) {
+  #listaSoba h1 {
+    font-size: 25px;
+  }
+}
+
 #listaSoba ul {
   font-size: 23px;
   list-style-type: none;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  #listaSoba ul {
+    font-size: 17px;
+  }
 }
 
 #listaSoba ul li {
@@ -146,6 +262,18 @@
   height: 40vh;
 }
 
+@media (max-width: 768px) {
+  #listaSoba img {
+    height: 30vh;
+  }
+}
+
+@media (max-width: 480px) {
+  #listaSoba img {
+    height: 20vh;
+  }
+}
+
 #app {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -160,7 +288,24 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  height: 100vh;
+}
+
+@media (max-width: 480px) {
+  #app {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 
 #app #online {
@@ -181,13 +326,39 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  padding: 25px;
+  align-items: center;
+  padding: 20px;
   color: #fefefe;
   background-color: #093028;
   width: 15vw;
+}
+
+@media (max-width: 768px) {
+  #app #online {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  #app #online {
+    height: 20vh;
+    width: 100vw;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
 }
 
 #app #online #asideNaslov {
@@ -206,9 +377,7 @@
           flex-direction: column;
   gap: 4px;
   padding-bottom: 10px;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  align-items: center;
 }
 
 #app #online #asideNaslov div {
@@ -233,6 +402,55 @@
   height: 30px;
 }
 
+@media (max-width: 768px) {
+  #app #online #asideNaslov div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    align-items: center;
+  }
+  #app #online #asideNaslov div img {
+    height: 20px;
+  }
+  #app #online #asideNaslov div h3 {
+    font-size: 15px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  #app #online #asideNaslov div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    align-items: center;
+  }
+  #app #online #asideNaslov div h3 {
+    font-size: 15px;
+    text-align: center;
+  }
+}
+
 #app #online ul {
   list-style-type: none;
 }
@@ -240,6 +458,13 @@
 #app #online ul li {
   padding: 5px;
   color: #fefefe;
+}
+
+@media (max-width: 768px) {
+  #app #online ul li {
+    padding: 3px;
+    font-size: 12px;
+  }
 }
 
 #app #online ul li .onlineDot {
@@ -274,7 +499,7 @@
   background-color: rebeccapurple;
   text-decoration: none;
   text-align: center;
-  padding: 20px;
+  padding: 15px;
   border-radius: 6px;
 }
 
@@ -282,10 +507,17 @@
   text-decoration: underline;
 }
 
+@media (max-width: 768px) {
+  #app #online #asideBottom a {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
+
 #app #online #asideBottom #signOut {
   padding: 8px;
-  background-color: #fefefe;
-  color: #093028;
+  background-color: #093028;
+  color: #fefefe;
   border-radius: 6px;
 }
 
@@ -310,15 +542,26 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+@media (max-width: 480px) {
+  #app #chat-area {
+    height: 80vh;
+  }
 }
 
 #app #chat-area h3 {
   background-color: #ebecf0;
-  padding: 10px;
+  padding: 20px;
   width: 85vw;
+}
+
+@media (max-width: 480px) {
+  #app #chat-area h3 {
+    width: 100vw;
+  }
 }
 
 #app #chat-area h3 span {
@@ -353,6 +596,8 @@
       -ms-flex-align: start;
           align-items: flex-start;
   padding: 20px;
+  height: 100%;
+  align-items: flex-start;
 }
 
 #app #chat-area #messages .container li {
@@ -378,9 +623,24 @@
   height: 80px;
 }
 
+@media (max-width: 768px) {
+  #app #chat-area #messages .container li {
+    font-size: 12px;
+    padding: 5px;
+    height: 50px;
+    margin-right: 2vw;
+  }
+}
+
 #app #chat-area #messages .container li svg {
   width: 50px;
   height: 50px;
+}
+
+@media (max-width: 768px) {
+  #app #chat-area #messages .container li svg {
+    height: 35px;
+  }
 }
 
 #app #chat-area #messages .container li #messageInfo {
@@ -412,7 +672,13 @@
 }
 
 #app #chat-area #messages .container li #messageInfo #messageBody div {
-  padding: 3px;
+  padding: 2px;
+}
+
+@media (max-width: 768px) {
+  #app #chat-area #messages .container li #messageInfo #messageBody div {
+    padding-left: 5px;
+  }
 }
 
 #app #chat-area #messages .container .sent {
@@ -431,6 +697,12 @@
 
 #app #chat-area #messages .container small {
   font-size: 10px;
+}
+
+@media (max-width: 768px) {
+  #app #chat-area #messages .container small {
+    height: 8px;
+  }
 }
 
 #app #chat-area #inputMsg {
@@ -462,6 +734,15 @@
   height: 40px;
 }
 
+@media (max-width: 768px) {
+  #app #chat-area #inputMsg input,
+  #app #chat-area #inputMsg button {
+    padding: 15px;
+    font-size: 13px;
+    height: 30px;
+  }
+}
+
 #app #chat-area #inputMsg input {
   width: 70vw;
 }
@@ -489,5 +770,17 @@
 
 #app #chat-area #inputMsg button img {
   height: 25px;
+}
+
+@media (max-width: 768px) {
+  #app #chat-area #inputMsg button img {
+    height: 17px;
+  }
+}
+
+@media (max-width: 480px) {
+  #app #chat-area #inputMsg button img {
+    height: 13px;
+  }
 }
 /*# sourceMappingURL=App.css.map */

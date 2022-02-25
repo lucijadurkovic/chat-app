@@ -5,21 +5,24 @@ import "./App.css";
 import SignOut from "./components/SignOut";
 
 import {
-  handleMsgChange,
   clearMsg,
   pushMsg,
   pushMembers,
   addMemberID,
   removeMember,
   unsubscribe,
+  addAvatar,
 } from "./redux/actions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { BigHead } from "@bigheads/core";
+import { getRandomOptions } from "./services/bigheads";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.drone = new window.Scaledrone("aOKticzsZfKAfItm", {
+      //šaljemo info o trenutnom memberu
       data: this.props.member,
     });
 
@@ -27,37 +30,23 @@ class App extends Component {
       if (error) {
         return console.error(error);
       }
+      //trenutnom memberu dajemo ID i avatar
       this.props.addMemberID(this.drone.clientId);
+      this.props.addAvatar(<BigHead {...getRandomOptions()} />);
     });
-
+    //subscribe na sobu
     this.room = this.drone.subscribe(`observable-${this.props.room}`);
     this.room.ime = this.props.room;
 
-    //dodaje nove poruke u messages state
+    //dodaje nove poruke u stanje
     this.room.on("message", (message) => {
       const { data, member, timestamp } = message;
-      console.log(this.props.members);
-      /* console.log(member.id);
-      console.log(this.props.member.id);
 
       if (member.id === this.props.member.id) {
-        //ako je id člana koji je poslao poruku jednak idju logiranog membera
-        member.clientData.avatar = this.props.member.avatar; //stavi njegov avatar
-        console.log(member.clientData.avatar);
+        member.avatar = this.props.member.avatar;
       } else {
-        //FILTRIRATI MEMBERS, NAĆI TAJ ID I STAVITI NJEGOV AVATAR
-        console.log(member.id);
-        console.log(this.props.members);
-        let sender = this.props.members.filter(
-          //filtriraj members i nađi onog čiji je id isti ko od sendera i spremi tog membera u let
-          (clan) => clan.id !== member.id
-        );
-        console.log(sender);
-
-        // member.clientData.avatar = sender[0].clientData.avatar; //odaberi avatar tog membera
-        console.log(member.clientData.avatar);
+        member.avatar = <BigHead {...getRandomOptions()} />;
       }
-      console.log(member.clientData.avatar); //tu je krivi member.clientData.avatar, dodati if - ako je current onda taj, ako nije onda dodati avatar od tog koji je*/
 
       let vrijeme = timestamp * 1000;
       var date = new Date(timestamp * 1000);
@@ -68,7 +57,7 @@ class App extends Component {
       this.props.pushMsg({ member, text: data, timestamp: vrijeme });
     });
 
-    //za display tko je online
+    //display tko je online
     this.room.on("members", (members) => {
       this.props.pushMembers(members);
     });
@@ -89,7 +78,7 @@ class App extends Component {
     });
   }
 
-  //zove drone publish i vraća input na prazno
+  //zove drone publish, vraća input na prazno
   handleSend(event) {
     event.preventDefault();
     this.onSendMessage(this.props.text);
@@ -114,7 +103,7 @@ class App extends Component {
               {this.props.members.map((member) => (
                 <li key={Math.random() + 5}>
                   <span className="onlineDot">&#9679;</span>
-                  {member.clientData?.username}
+                  {member.clientData.username}
                 </li>
               ))}
             </ul>
@@ -133,13 +122,9 @@ class App extends Component {
               Room name: <span>{this.room.ime}</span>
             </h3>
 
-            <Messages member={this.props.member}></Messages>
+            <Messages />
           </div>
-          <Input
-            value={this.props.text}
-            handleSend={(e) => this.handleSend(e)}
-            handleChange={this.props.handleMsgChange}
-          />
+          <Input handleSend={(e) => this.handleSend(e)} />
         </div>
       </div>
     );
@@ -155,13 +140,13 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  handleMsgChange,
   clearMsg,
   pushMsg,
   pushMembers,
   addMemberID,
   removeMember,
   unsubscribe,
+  addAvatar,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

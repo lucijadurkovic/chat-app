@@ -3,6 +3,8 @@ $sentMessages: #31a24c;
 $receivedMessages: #ebecf0;
 $primary: #093028;
 $secondary: #fefefe;
+$breakpoint-tablet: 768px;
+$breakpoint-phone: 480px;
 
 //mixins
 @mixin flex($direction) {
@@ -21,10 +23,6 @@ $secondary: #fefefe;
   font-weight: 100;
 }
 
-#app {
-  @include flex(row);
-}
-
 //SignIn
 .signIn {
   @include flex(row);
@@ -32,26 +30,65 @@ $secondary: #fefefe;
   color: #093028;
   gap: 50px;
   height: 100vh;
+  @media (max-width: $breakpoint-phone) {
+    @include flex(column);
+    gap: 20px;
+    justify-content: space-evenly;
+  }
   img {
     display: inherit;
     height: 40vh;
+    @media (max-width: $breakpoint-tablet) {
+      height: 30vh;
+    }
+    @media (max-width: $breakpoint-phone) {
+      height: 20vh;
+    }
   }
   #signinForm {
     @include flex(column);
+
     gap: 30px;
+
     height: 80%;
     border-radius: 6px;
+    @media (max-width: $breakpoint-tablet) {
+      gap: 20px;
+    }
+
+    @media (max-width: $breakpoint-phone) {
+      gap: 10px;
+      height: 30vh;
+    }
     h1 {
       font-size: 40px;
+      @media (max-width: $breakpoint-tablet) {
+        font-size: 25px;
+      }
+
+      @media (max-width: $breakpoint-phone) {
+        font-size: 17px;
+        text-align: center;
+      }
     }
     h2 {
       font-size: 30px;
+      @media (max-width: $breakpoint-tablet) {
+        font-size: 20px;
+      }
+
+      @media (max-width: $breakpoint-phone) {
+        font-size: 13px;
+      }
     }
     #username,
     #signinBtn {
       padding: 10px;
       margin: 3px;
       color: $primary;
+      @media (max-width: $breakpoint-tablet) {
+        padding: 5px;
+      }
     }
 
     #signinBtn {
@@ -61,6 +98,12 @@ $secondary: #fefefe;
       border-radius: 6px;
       border: none;
     }
+    div {
+      @media (max-width: $breakpoint-phone) {
+        @include flex(column);
+        align-items: center;
+      }
+    }
   }
 }
 
@@ -68,15 +111,27 @@ $secondary: #fefefe;
   @include flex(row);
   gap: 10vw;
   height: 100vh;
+  @media (max-width: $breakpoint-phone) {
+    @include flex(column);
+    gap: 20px;
+    justify-content: space-evenly;
+  }
   h1 {
     font-size: 40px;
     color: $primary;
     margin-bottom: 10px;
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 25px;
+    }
   }
   ul {
     font-size: 23px;
     list-style-type: none;
     text-align: center;
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 17px;
+    }
+
     li {
       padding: 5px;
       color: $primary;
@@ -97,34 +152,73 @@ $secondary: #fefefe;
   }
   img {
     height: 40vh;
+    @media (max-width: $breakpoint-tablet) {
+      height: 30vh;
+    }
+    @media (max-width: $breakpoint-phone) {
+      height: 20vh;
+    }
   }
 }
 
 //App
 #app {
   @include flex(row);
-  height: 100vh;
+  @media (max-width: $breakpoint-phone) {
+    @include flex(column);
+  }
 
   #online {
     height: 100vh;
     @include flex(column);
     justify-content: space-between;
-    align-items: flex-start;
-    padding: 25px;
+    align-items: center;
+    padding: 20px;
     color: $secondary;
     background-color: $primary;
     width: 15vw;
+    @media (max-width: $breakpoint-tablet) {
+      padding: 10px;
+    }
+    @media (max-width: $breakpoint-phone) {
+      height: 20vh;
+      width: 100vw;
+      @include flex(row);
+      justify-content: space-around;
+    }
+
     #asideNaslov {
       @include flex(column);
       gap: 4px;
       padding-bottom: 10px;
-      align-items: flex-start;
+      align-items: center;
       div {
         @include flex(row);
         padding-bottom: 10px;
         gap: 4px;
         img {
           height: 30px;
+        }
+        @media (max-width: $breakpoint-tablet) {
+          @include flex(column);
+          align-items: center;
+          img {
+            height: 20px;
+          }
+
+          h3 {
+            font-size: 15px;
+            text-align: center;
+          }
+        }
+        @media (max-width: $breakpoint-phone) {
+          @include flex(column);
+          align-items: center;
+
+          h3 {
+            font-size: 15px;
+            text-align: center;
+          }
         }
       }
     }
@@ -134,6 +228,10 @@ $secondary: #fefefe;
       li {
         padding: 5px;
         color: $secondary;
+        @media (max-width: $breakpoint-tablet) {
+          padding: 3px;
+          font-size: 12px;
+        }
         .onlineDot {
           color: #31a24c;
           margin-right: 6px;
@@ -150,16 +248,20 @@ $secondary: #fefefe;
         background-color: rebeccapurple;
         text-decoration: none;
         text-align: center;
-        padding: 20px;
+        padding: 15px;
         border-radius: 6px;
         &:hover {
           text-decoration: underline;
         }
+        @media (max-width: $breakpoint-tablet) {
+          font-size: 12px;
+          padding: 10px;
+        }
       }
       #signOut {
         padding: 8px;
-        background-color: $secondary;
-        color: $primary;
+        background-color: $primary;
+        color: $secondary;
         border-radius: 6px;
       }
     }
@@ -169,11 +271,20 @@ $secondary: #fefefe;
     height: 100vh;
     @include flex(column);
     justify-content: space-between;
-    align-items: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    @media (max-width: $breakpoint-phone) {
+      height: 80vh;
+    }
+
     h3 {
       background-color: #ebecf0;
-      padding: 10px;
+      padding: 20px;
       width: 85vw;
+
+      @media (max-width: $breakpoint-phone) {
+        width: 100vw;
+      }
       span {
         font-weight: 600;
       }
@@ -182,6 +293,7 @@ $secondary: #fefefe;
     #messages {
       width: 100%;
       padding: 10px;
+
       .container {
         list-style-type: none;
         width: 100%;
@@ -189,6 +301,9 @@ $secondary: #fefefe;
         justify-content: flex-start;
         align-items: flex-start;
         padding: 20px;
+        height: 100%;
+        align-items: flex-start;
+
         li {
           @include flex(row);
           align-items: flex-start;
@@ -196,13 +311,23 @@ $secondary: #fefefe;
           padding: 10px;
           margin: 5px;
           height: 80px;
+          @media (max-width: $breakpoint-tablet) {
+            font-size: 12px;
+            padding: 5px;
+            height: 50px;
+            margin-right: 2vw;
+          }
           svg {
             width: 50px;
             height: 50px;
+            @media (max-width: $breakpoint-tablet) {
+              height: 35px;
+            }
           }
           #messageInfo {
             @include flex(column);
             align-items: flex-start;
+
             small {
               padding-left: 3px;
             }
@@ -211,7 +336,10 @@ $secondary: #fefefe;
               font-weight: bold;
             }
             #messageBody div {
-              padding: 3px;
+              padding: 2px;
+              @media (max-width: $breakpoint-tablet) {
+                padding-left: 5px;
+              }
             }
           }
         }
@@ -228,6 +356,9 @@ $secondary: #fefefe;
         }
         small {
           font-size: 10px;
+          @media (max-width: $breakpoint-tablet) {
+            height: 8px;
+          }
         }
       }
     }
@@ -243,6 +374,11 @@ $secondary: #fefefe;
         padding: 10px;
         font-size: 15px;
         height: 40px;
+        @media (max-width: $breakpoint-tablet) {
+          padding: 15px;
+          font-size: 13px;
+          height: 30px;
+        }
       }
       input {
         width: 70vw;
@@ -256,6 +392,12 @@ $secondary: #fefefe;
         border: none;
         img {
           height: 25px;
+          @media (max-width: $breakpoint-tablet) {
+            height: 17px;
+          }
+          @media (max-width: $breakpoint-phone) {
+            height: 13px;
+          }
         }
       }
     }

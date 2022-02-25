@@ -7,18 +7,23 @@ export const PUSH_MEMBERS = "PUSH_MEMBERS";
 export const ADD_MEMBER_ID = "ADD_MEMBER_ID";
 export const REMOVE_MEMBER = "REMOVE_MEMBER";
 export const UNSUBSCRIBE = "UNSUBSCRIBE";
+export const ADD_AVATAR = "ADD_AVATAR";
 
 export const handleSubmit = () => {
   let username = document.getElementById("username").value;
   return { type: HANDLE_SUBMIT, payload: username };
 };
-export const addMemberID = (id) => {
-  return { type: ADD_MEMBER_ID, payload: id };
-};
 
 export const handleUsername = () => {
   let username = document.getElementById("username").value;
   return { type: HANDLE_USERNAME, payload: username };
+};
+
+export const addMemberID = (id) => {
+  return { type: ADD_MEMBER_ID, payload: id };
+};
+export const addAvatar = (avatar) => {
+  return { type: ADD_AVATAR, payload: avatar };
 };
 
 export const handleMsgChange = () => {
@@ -44,16 +49,3 @@ export const removeMember = (member) => {
 export const unsubscribe = () => {
   return { type: UNSUBSCRIBE };
 };
-
-/*export const osvjeziFilmove = () => async (dispatch) => {
-  //u ovim zagradama pišemo bilo što asinkrono, do tu je sve špranca
-  let dohvaceniFilmovi = await fetch(
-    `https://api.tvmaze.com/search/shows?q=star`
-  ).then((response) =>
-    response.json().then((data) => {
-      return data;
-    })
-  );
-  dispatch({ type: OSVJEZI_FILMOVE, payload: dohvaceniFilmovi }); //ovo obavezno na kraju za pokretanje promjene stanja
-};
-*/

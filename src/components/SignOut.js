@@ -9,7 +9,7 @@ const SignOut = (props) => {
   };
   return (
     <Link id="signOut" to="/" onClick={resetUsername}>
-      Signout
+      Sign Out
     </Link>
   );
 };
