@@ -1,6 +1,6 @@
 # Chat App
 
-Real-time communication app, built with React.js and [ScaledroneRealtime Messaging Service](https://www.scaledrone.com/).
+Real-time communication app, built with React.js and a messaging service [Scaledrone](https://www.scaledrone.com/).
 
 ## Available Scripts
 
